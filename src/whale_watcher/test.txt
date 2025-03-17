@@ -1,0 +1,1 @@
+SOLANA_RPC_URL = "https://mainnet.helius-rpc.com/?api-key=e8058f80-2269-41ad-83d7-a9c7bc6e7142"

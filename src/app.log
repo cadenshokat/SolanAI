@@ -1,0 +1,216 @@
+DEBUG:asyncio:Using selector: KqueueSelector
+DEBUG:websockets.client:= connection is CONNECTING
+DEBUG:websockets.client:> GET / HTTP/1.1
+DEBUG:websockets.client:> Host: api.mainnet-beta.solana.com
+DEBUG:websockets.client:> Upgrade: websocket
+DEBUG:websockets.client:> Connection: Upgrade
+DEBUG:websockets.client:> Sec-WebSocket-Key: gg6HmHR6jEjM/ujsvTHrLQ==
+DEBUG:websockets.client:> Sec-WebSocket-Version: 13
+DEBUG:websockets.client:> Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+DEBUG:websockets.client:> User-Agent: Python/3.12 websockets/13.1
+DEBUG:websockets.client:< HTTP/1.1 101 Switching Protocols
+DEBUG:websockets.client:< upgrade: websocket
+DEBUG:websockets.client:< connection: Upgrade
+DEBUG:websockets.client:< sec-websocket-accept: GtLa1F/qo/QUGZleaPHVy0sDfps=
+DEBUG:websockets.client:< x-rpc-node: ash2
+DEBUG:websockets.client:< x-ratelimit-tier: free
+DEBUG:websockets.client:< x-ratelimit-method-limit: 40
+DEBUG:websockets.client:< x-ratelimit-method-remaining: 39
+DEBUG:websockets.client:< x-ratelimit-rps-limit: 100
+DEBUG:websockets.client:< x-ratelimit-rps-remaining: 99
+DEBUG:websockets.client:< x-ratelimit-endpoint-limit: unlimited
+DEBUG:websockets.client:< x-ratelimit-endpoint-remaining: -1738
+DEBUG:websockets.client:< x-ratelimit-conn-limit: 40
+DEBUG:websockets.client:< x-ratelimit-conn-remaining: 39
+DEBUG:websockets.client:< x-ratelimit-connrate-limit: 40
+DEBUG:websockets.client:< x-ratelimit-connrate-remaining: 39
+DEBUG:websockets.client:< x-ratelimit-pubsub-limit: 5
+DEBUG:websockets.client:< x-ratelimit-pubsub-remaining: 5
+DEBUG:websockets.client:< access-control-allow-origin: backend_traffic
+DEBUG:websockets.client:< access-control-allow-methods: OPTIONS, POST, GET
+DEBUG:websockets.client:< access-control-allow-headers: authorization, *
+DEBUG:websockets.client:< access-control-max-age: 86400
+DEBUG:websockets.client:< allow: OPTIONS, POST, GET
+DEBUG:websockets.client:= connection is OPEN
+DEBUG:websockets.client:> TEXT '{"method":"logsSubscribe","jsonrpc":"2.0","id":...mitment":"finalized"}]}' [149 bytes]
+DEBUG:websockets.client:% sending keepalive ping
+DEBUG:websockets.client:> PING d5 cf 95 91 [binary, 4 bytes]
+DEBUG:websockets.client:! timed out waiting for keepalive pong
+DEBUG:websockets.client:! failing connection with code 1011
+DEBUG:websockets.client:= connection is CLOSING
+DEBUG:websockets.client:> CLOSE 1011 (internal error) keepalive ping timeout [24 bytes]
+DEBUG:websockets.client:! timed out waiting for TCP close
+DEBUG:websockets.client:x closing TCP connection
+DEBUG:websockets.client:! timed out waiting for TCP close
+DEBUG:websockets.client:x aborting TCP connection
+DEBUG:websockets.client:= connection is CLOSED
+ERROR:root:sent 1011 (internal error) keepalive ping timeout; no close frame received
+Traceback (most recent call last):
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 1287, in close_connection
+    await self.transfer_data_task
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 953, in transfer_data
+    message = await self.read_message()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 1023, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 1098, in read_data_frame
+    frame = await self.read_frame(max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 1155, in read_frame
+    frame = await Frame.read(
+            ^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/framing.py", line 70, in read
+    data = await reader(2)
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/streams.py", line 752, in readexactly
+    await self._wait_for_data('readexactly')
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/streams.py", line 545, in _wait_for_data
+    await self._waiter
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/cadenshokat/PycharmProjects/CashCow/src/new_pools.py", line 45, in main
+    subscription_id = await subscribe_to_logs(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/src/new_pools.py", line 82, in subscribe_to_logs
+    first_resp = await websocket.recv()
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/solana/rpc/websocket_api.py", line 111, in recv
+    data = await super().recv()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 562, in recv
+    await self.ensure_open()
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 938, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: sent 1011 (internal error) keepalive ping timeout; no close frame received
+DEBUG:websockets.client:= connection is CONNECTING
+DEBUG:websockets.client:> GET / HTTP/1.1
+DEBUG:websockets.client:> Host: api.mainnet-beta.solana.com
+DEBUG:websockets.client:> Upgrade: websocket
+DEBUG:websockets.client:> Connection: Upgrade
+DEBUG:websockets.client:> Sec-WebSocket-Key: Q/LODPL4XwdZTys+jdZfkQ==
+DEBUG:websockets.client:> Sec-WebSocket-Version: 13
+DEBUG:websockets.client:> Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+DEBUG:websockets.client:> User-Agent: Python/3.12 websockets/13.1
+DEBUG:websockets.client:< HTTP/1.1 101 Switching Protocols
+DEBUG:websockets.client:< upgrade: websocket
+DEBUG:websockets.client:< connection: Upgrade
+DEBUG:websockets.client:< sec-websocket-accept: ISwszuOKJcuWyNCf9nw1SJ9/jEE=
+DEBUG:websockets.client:< x-rpc-node: ash24
+DEBUG:websockets.client:< x-ratelimit-tier: free
+DEBUG:websockets.client:< x-ratelimit-method-limit: 40
+DEBUG:websockets.client:< x-ratelimit-method-remaining: 39
+DEBUG:websockets.client:< x-ratelimit-rps-limit: 100
+DEBUG:websockets.client:< x-ratelimit-rps-remaining: 99
+DEBUG:websockets.client:< x-ratelimit-endpoint-limit: unlimited
+DEBUG:websockets.client:< x-ratelimit-endpoint-remaining: -1458
+DEBUG:websockets.client:< x-ratelimit-conn-limit: 40
+DEBUG:websockets.client:< x-ratelimit-conn-remaining: 39
+DEBUG:websockets.client:< x-ratelimit-connrate-limit: 40
+DEBUG:websockets.client:< x-ratelimit-connrate-remaining: 39
+DEBUG:websockets.client:< x-ratelimit-pubsub-limit: 5
+DEBUG:websockets.client:< x-ratelimit-pubsub-remaining: 5
+DEBUG:websockets.client:< access-control-allow-origin: backend_traffic
+DEBUG:websockets.client:< access-control-allow-methods: OPTIONS, POST, GET
+DEBUG:websockets.client:< access-control-allow-headers: authorization, *
+DEBUG:websockets.client:< access-control-max-age: 86400
+DEBUG:websockets.client:< allow: OPTIONS, POST, GET
+DEBUG:websockets.client:= connection is OPEN
+DEBUG:websockets.client:> TEXT '{"method":"logsSubscribe","jsonrpc":"2.0","id":...mitment":"finalized"}]}' [149 bytes]
+DEBUG:websockets.client:% sending keepalive ping
+DEBUG:websockets.client:> PING 63 83 c4 b9 [binary, 4 bytes]
+DEBUG:websockets.client:! timed out waiting for keepalive pong
+DEBUG:websockets.client:! failing connection with code 1011
+DEBUG:websockets.client:= connection is CLOSING
+DEBUG:websockets.client:> CLOSE 1011 (internal error) keepalive ping timeout [24 bytes]
+DEBUG:websockets.client:! timed out waiting for TCP close
+DEBUG:websockets.client:x closing TCP connection
+DEBUG:websockets.client:! timed out waiting for TCP close
+DEBUG:websockets.client:x aborting TCP connection
+DEBUG:websockets.client:= connection is CLOSED
+ERROR:root:sent 1011 (internal error) keepalive ping timeout; no close frame received
+Traceback (most recent call last):
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 1287, in close_connection
+    await self.transfer_data_task
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 953, in transfer_data
+    message = await self.read_message()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 1023, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 1098, in read_data_frame
+    frame = await self.read_frame(max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 1155, in read_frame
+    frame = await Frame.read(
+            ^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/framing.py", line 70, in read
+    data = await reader(2)
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/streams.py", line 752, in readexactly
+    await self._wait_for_data('readexactly')
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/streams.py", line 545, in _wait_for_data
+    await self._waiter
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/cadenshokat/PycharmProjects/CashCow/src/new_pools.py", line 45, in main
+    subscription_id = await subscribe_to_logs(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/src/new_pools.py", line 82, in subscribe_to_logs
+    first_resp = await websocket.recv()
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/solana/rpc/websocket_api.py", line 111, in recv
+    data = await super().recv()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 562, in recv
+    await self.ensure_open()
+  File "/Users/cadenshokat/PycharmProjects/CashCow/.venv/lib/python3.12/site-packages/websockets/legacy/protocol.py", line 938, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: sent 1011 (internal error) keepalive ping timeout; no close frame received
+DEBUG:websockets.client:= connection is CONNECTING
+DEBUG:websockets.client:> GET / HTTP/1.1
+DEBUG:websockets.client:> Host: api.mainnet-beta.solana.com
+DEBUG:websockets.client:> Upgrade: websocket
+DEBUG:websockets.client:> Connection: Upgrade
+DEBUG:websockets.client:> Sec-WebSocket-Key: s1Q/obEf/5sYA9IAmAhwUA==
+DEBUG:websockets.client:> Sec-WebSocket-Version: 13
+DEBUG:websockets.client:> Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+DEBUG:websockets.client:> User-Agent: Python/3.12 websockets/13.1
+DEBUG:websockets.client:< HTTP/1.1 101 Switching Protocols
+DEBUG:websockets.client:< upgrade: websocket
+DEBUG:websockets.client:< connection: Upgrade
+DEBUG:websockets.client:< sec-websocket-accept: qfL8k426QOZTqOK+doz/zyyxjkA=
+DEBUG:websockets.client:< x-rpc-node: ash24
+DEBUG:websockets.client:< x-ratelimit-tier: free
+DEBUG:websockets.client:< x-ratelimit-method-limit: 40
+DEBUG:websockets.client:< x-ratelimit-method-remaining: 39
+DEBUG:websockets.client:< x-ratelimit-rps-limit: 100
+DEBUG:websockets.client:< x-ratelimit-rps-remaining: 99
+DEBUG:websockets.client:< x-ratelimit-endpoint-limit: unlimited
+DEBUG:websockets.client:< x-ratelimit-endpoint-remaining: -1206
+DEBUG:websockets.client:< x-ratelimit-conn-limit: 40
+DEBUG:websockets.client:< x-ratelimit-conn-remaining: 38
+DEBUG:websockets.client:< x-ratelimit-connrate-limit: 40
+DEBUG:websockets.client:< x-ratelimit-connrate-remaining: 38
+DEBUG:websockets.client:< x-ratelimit-pubsub-limit: 5
+DEBUG:websockets.client:< x-ratelimit-pubsub-remaining: 4
+DEBUG:websockets.client:< access-control-allow-origin: backend_traffic
+DEBUG:websockets.client:< access-control-allow-methods: OPTIONS, POST, GET
+DEBUG:websockets.client:< access-control-allow-headers: authorization, *
+DEBUG:websockets.client:< access-control-max-age: 86400
+DEBUG:websockets.client:< allow: OPTIONS, POST, GET
+DEBUG:websockets.client:= connection is OPEN
+DEBUG:websockets.client:> TEXT '{"method":"logsSubscribe","jsonrpc":"2.0","id":...mitment":"finalized"}]}' [149 bytes]
+DEBUG:websockets.client:= connection is CLOSING
+DEBUG:websockets.client:> CLOSE 1000 (OK) [2 bytes]
+DEBUG:websockets.client:! timed out waiting for TCP close
+DEBUG:websockets.client:x closing TCP connection
+DEBUG:websockets.client:! timed out waiting for TCP close
+DEBUG:websockets.client:x aborting TCP connection
+DEBUG:websockets.client:= connection is CLOSED
