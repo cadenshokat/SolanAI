@@ -1,0 +1,105 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .1rem 2rem;
+  background-color: #191919;
+
+  border-bottom: .001px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 2px 5px rgba(255, 255, 255, 0.1);
+
+  color: #fff;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: .5rem;
+  margin-top: .1rem;
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+  margin-right: 4rem;
+  justify-content: right;
+  gap: 3rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: normal;
+  transition: color 0.3s;
+}
+
+.nav a:hover {
+  color: #b1b1b1;
+}
+
+/* Right side: Map/Key container */
+.map-key-container {
+  flex: 0.5;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+/* Map/Key button styling */
+.map-key-button {
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: #686868;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.map-key-button:hover {
+  background-color: #4a5568;
+}
+
+/* Dropdown styling */
+.dropdown {
+  position: absolute;
+  top: 100%; /* Position below the button */
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  min-width: 150px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+/* Show the dropdown on hover */
+.map-key-button:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown li {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #eee;
+  color: #333;
+  background-color: #fff;
+}
+
+.dropdown li:last-child {
+  border-bottom: none;
+}
+
+/* Optional: Add a hover effect for dropdown items */
+.dropdown li:hover {
+  background-color: #f5f5f5;
+}

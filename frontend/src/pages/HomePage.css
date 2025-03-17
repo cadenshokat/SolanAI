@@ -1,0 +1,118 @@
+/* Overall page container: full width so boxes can nearly touch page edges */
+.container {
+  background-color: #121212;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Flex container for the two boxes */
+.box-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+/* Left box styling */
+.left-box {
+  width: calc(20% - 10px);
+  height: 280px;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  border: 1px solid #333;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
+
+/* Header info (SOL symbol and timeframe) */
+.header-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.header-info h3 {
+  display: flex;
+  padding: .8rem;
+  color: #6c6c6c;
+  font-family: "Arial Unicode MS";
+
+}
+
+.sol_image {
+  width: 36px;  /* adjust width as needed */
+  height: auto;
+  margin-right: 8px;
+  padding: .2rem;
+}
+
+/* Price info: price, change %, and arrow on one line */
+.price-info {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 1px 0;
+  color: #cccccc;
+  font-size: 23px;
+}
+
+/* Price change styling */
+.price-change {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #05fb11;  /* or green/red depending on your conditions */
+}
+
+/* Sparkline styling */
+.sparkLine {
+  margin-top: .1rem; /* pushes sparkline to the bottom of the box */
+  width: 90%;
+  align-self: center;
+}
+
+/* Right box styling */
+.right-box {
+  width: 55%;
+  height: 280px;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  border: 1px solid #333;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-right: 20.5rem;
+}
+
+.marquee-container {
+  display: flex;
+  justify-content: center;
+}
+
+.marquee-box {
+  height: 30px;
+  width: 98%;
+  justify-content: center;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  margin-top: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+
+}
+
+.marquee h5 {
+  color: #fafafa;
+}
+
+.right-box h2 {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+}

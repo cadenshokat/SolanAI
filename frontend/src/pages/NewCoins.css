@@ -1,0 +1,168 @@
+/* src/pages/CoinsTables.css */
+.coins-tables-container {
+  padding: 2rem;
+  background-color: #121212;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table-section {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2rem;
+}
+
+.table-section h2 {
+  margin-bottom: 1rem;
+  text-align: left;
+  color: #f0f0f0;
+}
+
+.coins-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #1b1b1b;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.coins-table thead {
+  background-color: #2a2a2a;
+}
+
+.coins-table th,
+.coins-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #2a2a2a;
+  text-align: left;
+}
+
+.coins-table th {
+  font-weight: 600;
+  color: #cfcfcf;
+}
+
+.coins-table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.coins-table tbody tr:hover {
+  background-color: #2f2f2f;
+}
+
+.red-flag {
+  color: #ff6363;
+  font-weight: 600;
+}
+
+.coin-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.coin-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.coin-name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.clipboard-icon {
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.copy-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+.copy-message.show {
+  opacity: 1;
+}
+
+/* Progress Bar Styles */
+.progress-bar {
+  width: 100%;
+  height: 4px; /* Adjust height as needed */
+  background-color: #333;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: #76c7c0; /* Adjust progress color */
+  transition: width 0.3s ease;
+}
+
+/* Example: Increase spacing for bonding curve column if needed */
+.coins-table th:nth-child(8),
+.coins-table td:nth-child(8) {
+  padding-left: 20px;
+}
+
+/* Container for progress bar and tooltip */
+.progress-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip styling (hidden by default) */
+.progress-container .tooltip {
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 1;
+  bottom: 110%;  /* Position tooltip above the progress bar */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+/* Arrow for tooltip */
+.progress-container .tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;  /* Arrow at bottom of tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show tooltip on hover */
+.progress-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}

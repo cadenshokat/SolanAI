@@ -1,0 +1,244 @@
+/* Container for the entire page split into left and right halves */
+.dashboard-container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  padding: 20px;
+  box-sizing: border-box;
+  background: linear-gradient(45deg, #121212, #121212);
+}
+
+/* Left panel: Wallet management table */
+.left-panel {
+  flex: 1;
+  border-right: 1px solid #444;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.wallet-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.wallet-input input {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #222;
+  color: #fff;
+}
+
+/* Modern sleek black table styling for wallet management */
+.wallet-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #1b1b1b;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  table-layout: fixed;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.wallet-table thead {
+  background-color: #2a2a2a;
+}
+
+.wallet-table th,
+.wallet-table td {
+  padding: 16px;
+  text-align: left;
+  color: #fff;
+  border-bottom: 1px solid #333;
+}
+
+.wallet-table tbody tr:hover {
+  background-color: #222;
+}
+
+.wallet-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.wallet-table button {
+  background-color: #e74c3c;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.wallet-table button:hover {
+  background-color: #c0392b;
+}
+
+/* Highlight style for wallet row when a transaction row is hovered */
+.highlight {
+  background-color: #444 !important;
+}
+
+/* Right panel: Tracker data display */
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Top box: Recent Transactions */
+.top-box {
+  flex: 1;
+  border-bottom: 1px solid #444;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1b1b1b;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  table-layout: fixed;
+}
+
+.transactions-table thead {
+  background-color: #2a2a2a;
+}
+
+.transactions-table th,
+.transactions-table td {
+  padding: 12px 16px;
+  text-align: left;
+  color: #fff;
+  border-bottom: 1px solid #333;
+}
+
+.transactions-table tbody tr:hover {
+  background-color: #222;
+}
+
+.transactions-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Bottom box: Popular Coins */
+.bottom-box {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.popular-coins-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popular-coins-list li {
+  padding: 10px;
+  border-bottom: 1px solid #333;
+  color: #fff;
+}
+
+.popular-coins-list li:last-child {
+  border-bottom: none;
+}
+
+/* Styling for each wallet's transaction section in the old view (if needed) */
+.wallet-section {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.wallet-section h4 {
+  margin-bottom: 5px;
+}
+
+.top-box h2 {
+  color: #fff;
+}
+
+.bottom-box h2 {
+  color: #fff;
+}
+
+.left-panel h2 {
+  color: #fff;
+}
+
+.wallet-table td.red-text {
+  color: #ff0000;
+}
+
+.wallet-table td.green-text {
+  color: #00ff00;
+}
+
+.clipboard-icon {
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.copy-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+.copy-message.show {
+  opacity: 1;
+}
+
+.coin-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.transactions-table td:nth-child(2),
+.transactions-table th:nth-child(2) {
+  padding-left: 40px;
+}
+
+.transactions-table th:nth-child(1),
+.transactions-table td:nth-child(1) {
+  width: 3%;
+  padding-left: 25px;
+}
+
+.top-box p {
+  color: #fff;
+}
+
+.bottom-box p {
+  color: #fff;
+}

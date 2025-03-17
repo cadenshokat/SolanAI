@@ -1,0 +1,146 @@
+.hero {
+  padding: 3rem 2rem;
+  /* background: linear-gradient(135deg, #191919, #333333); */
+  background: #1b1a1a;
+  color: #ffffff;
+  text-align: center;
+  animation: fadeIn 1s ease-out;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: rgba(48, 48, 48, 0.2);
+
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.hero h1 {
+  font-weight: bold;
+}
+
+.header-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.header-info h2 {
+  font-size: 26px;
+}
+
+.header-info h3 {
+  display: flex;
+  padding: .8rem;
+  color: #6c6c6c;
+  font-family: "Arial Unicode MS";
+
+}
+
+.sol_image {
+  width: 36px;  /* adjust width as needed */
+  height: auto;
+  margin-right: 8px;
+  padding: .2rem;
+}
+
+.price-info {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 1px 0;
+  color: #cccccc;
+  font-size: 23px;
+}
+
+/* Price change styling */
+.price-change {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #05fb11;  /* or green/red depending on your conditions */
+}
+
+
+.sparkLine {
+  margin-top: .1rem; /* pushes sparkline to the bottom of the box */
+  width: 90%;
+  align-self: center;
+}
+
+.fear-greed-container {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+/* The background bar from red to green */
+.fear-greed-bar {
+  position: relative;
+  margin-bottom: 2rem;
+  width: 100%;
+  height: 5px;
+  margin: 0.5rem 0;
+  background: linear-gradient(to right, red, yellow, green);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* The pointer that indicates the exact value */
+.fear-greed-pointer {
+  position: absolute;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+/* Label that shows the numeric value + classification */
+.fear-greed-label {
+  margin-top: 0.25rem;
+  font-weight: bold;
+}
+
+
+.fg-sparkLine {
+  margin-top: 3rem; /* pushes sparkline to the bottom of the box */
+  width: 90%;
+  align-self: center;
+}
+
+.heading {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.info-circle {
+  height: 18px;
+  width: auto;
+  margin-top: .4rem;
+}
+
+.my-tooltip {
+   width: 30px;
+
+}
