@@ -1,5 +1,5 @@
 # ---- Project settings ----
-PROJECT ?= solwatch
+PROJECT ?= solanai
 IMAGE   ?= $(PROJECT):latest
 COMPOSE ?= docker compose
 PY      ?= python
@@ -21,10 +21,12 @@ help:
 	@echo "  clean             Remove caches & __pycache__"
 
 # ---- Local (no docker) ----
-.PHONY: install
+.PHONY: install install-dev
 install:
-	python -m venv .venv
-	. .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt
+\tpip install .
+
+install-dev:
+\tpip install -e .[dev]
 
 .PHONY: run
 run:

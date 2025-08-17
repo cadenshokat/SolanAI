@@ -17,10 +17,8 @@ _nc_lock, _ac_lock = RLock(), RLock()
 
 
 def _format_pump_coin(coin: Dict[str, Any]) -> Dict[str, Any]:
-    # Convert Pump.fun payload to your schema (preserve original fields)
     timestamp_ms = coin.get("creationTime", 0) or 0
     ts = int(timestamp_ms // 1000)
-    # age (timedelta) was only used to compute recency; we’ll keep raw seconds
     out = {
         "image": coin.get("imageUrl"),
         "name": coin.get("name"),
@@ -34,7 +32,6 @@ def _format_pump_coin(coin: Dict[str, Any]) -> Dict[str, Any]:
         "red_flag": False,
     }
 
-    # Reapply your red-flag rules
     holders = coin.get("holders") or []
     for h in holders:
         if h.get("holderId") == out["dev"]:

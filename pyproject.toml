@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "solanai"
+version = "0.1.0"
+description = "Solana tracking API with Flask, APScheduler, SQLite, and Twitter/market integrations."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Your Name" }]
+keywords = ["flask", "solana", "scheduler", "sqlite", "api", "twitter", "defi"]
+
+dependencies = [
+  "Flask>=3.0,<4",
+  "flask-cors>=4.0,<5",
+  "APScheduler>=3.10,<4",
+  "pydantic==1.10.13",
+  "python-dotenv>=1.0,<2",
+  "requests>=2.31,<3",
+  "selenium>=4.20,<5",
+  "twscrape>=0.12",
+  "textblob>=0.17,<0.18",
+  "gunicorn>=21.2,<22",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2,<9",
+  "pytest-cov>=5.0,<6",
+  "pytest-asyncio>=0.23,<0.24",
+  "responses>=0.25,<0.26",
+  "freezegun>=1.5,<2",
+]
+
+[project.urls]
+Homepage = "https://example.com"
+Repository = "https://example.com/repo"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*", "worker*"]
+exclude = ["tests*", "node_modules*", "dist*", "build*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --cov=app --cov=worker --cov-report=term-missing"
+filterwarnings = [
+  "ignore::DeprecationWarning:twscrape.*",
+  "ignore::DeprecationWarning:selenium.*",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
