@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import os
 from typing import Any, Dict, List, Optional
-import requests
 
+import requests
 
 DEFAULT_UA = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "

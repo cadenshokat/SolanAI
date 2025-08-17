@@ -4,7 +4,9 @@ import datetime as dt
 def test_update_and_overview(monkeypatch):
     from app.services import wallets
 
-    monkeypatch.setattr(wallets, "get_wallet_7d_metrics", lambda w: {"7d PnL": "1%", "7d Volume": "10k"})
+    monkeypatch.setattr(
+        wallets, "get_wallet_7d_metrics", lambda w: {"7d PnL": "1%", "7d Volume": "10k"}
+    )
 
     updated = wallets.update_wallets(["A", "B", "C"])
     assert updated == ["A", "B", "C"]
@@ -20,19 +22,43 @@ def test_get_recent_transfers_filters_and_parses(monkeypatch):
     now = int(dt.datetime.now(dt.timezone.utc).timestamp())
 
     rows = [
-        {"activity_type": "ACTIVITY_SPL_TRANSFER", "token_address": "TOKEN1", "block_time": now - 60,
-         "amount": 12345, "token_decimals": 3, "trans_id": "tx1"},
-        {"activity_type": "OTHER", "token_address": "X", "block_time": now - 60, "amount": 1, "token_decimals": 0},
-        {"activity_type": "ACTIVITY_SPL_TRANSFER", "token_address": "So11111111111111111111111111111111111111112",
-         "block_time": now - 60, "amount": 1, "token_decimals": 0},
-        {"activity_type": "ACTIVITY_SPL_TRANSFER", "token_address": "TOKEN2", "block_time": "bad",
-         "amount": 1, "token_decimals": 0},
+        {
+            "activity_type": "ACTIVITY_SPL_TRANSFER",
+            "token_address": "TOKEN1",
+            "block_time": now - 60,
+            "amount": 12345,
+            "token_decimals": 3,
+            "trans_id": "tx1",
+        },
+        {
+            "activity_type": "OTHER",
+            "token_address": "X",
+            "block_time": now - 60,
+            "amount": 1,
+            "token_decimals": 0,
+        },
+        {
+            "activity_type": "ACTIVITY_SPL_TRANSFER",
+            "token_address": "So11111111111111111111111111111111111111112",
+            "block_time": now - 60,
+            "amount": 1,
+            "token_decimals": 0,
+        },
+        {
+            "activity_type": "ACTIVITY_SPL_TRANSFER",
+            "token_address": "TOKEN2",
+            "block_time": "bad",
+            "amount": 1,
+            "token_decimals": 0,
+        },
     ]
 
     class FakeClient:
-        def account_transfers(self, *a, **k): return rows
+        def account_transfers(self, *a, **k):
+            return rows
 
     from app.clients import solscan as solscan_mod
+
     monkeypatch.setattr(solscan_mod, "SolscanClient", lambda: FakeClient())
 
     out = wallets._get_recent_transfers(["W1"])

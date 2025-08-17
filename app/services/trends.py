@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import asyncio
 import json
-import os
 import sqlite3
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
@@ -12,22 +11,24 @@ from twscrape import API, gather
 from ..core.config import settings
 from .twitter_accounts import add_account, delete_account
 
-
 # -------------------
 # DB (separate file, per your existing pattern)
 # -------------------
+
 
 def _connect_trends_db() -> sqlite3.Connection:
     # Uses settings.TRENDS_DB (default: "trend_scraper/trending_data.db")
     path = settings.TRENDS_DB
     conn = sqlite3.connect(path, check_same_thread=False)
     conn.row_factory = sqlite3.Row
-    conn.execute("""
+    conn.execute(
+        """
         CREATE TABLE IF NOT EXISTS trending (
             run_time TEXT PRIMARY KEY,   -- ISO8601 timestamp
             topics   TEXT NOT NULL       -- JSON list
         )
-    """)
+    """
+    )
     return conn
 
 
@@ -60,6 +61,7 @@ def _latest_row() -> Optional[sqlite3.Row]:
 # Public Read API (used by /api/trending route)
 # -------------------
 
+
 def get_trending() -> Dict[str, Any]:
     row = _latest_row()
     if not row:
@@ -78,6 +80,7 @@ def needs_update(hours: int = 1) -> bool:
 # -------------------
 # Ingest (refactor of your get_trends.py)
 # -------------------
+
 
 async def _fetch_trending_topics_async(account_username: str) -> None:
     """

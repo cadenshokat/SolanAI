@@ -1,9 +1,11 @@
 # app/__init__.py
 from flask import Flask
 from flask_cors import CORS
-from .core.config import settings
+
 from .api.routes import api
+from .core.config import settings
 from .core.logging import configure_logging
+
 
 def create_app() -> Flask:
     configure_logging()

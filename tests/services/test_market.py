@@ -3,6 +3,7 @@ def test_fetch_sol_price_success(mock_http, monkeypatch, tmp_db):
     monkeypatch.setenv("DB_PATH", str(tmp_db))
 
     from app.db import sol_store
+
     sol_store.init()
 
     from app.services import market
@@ -25,6 +26,7 @@ def test_refresh_sol_price_persists_and_reads(mock_http, monkeypatch, tmp_db):
     monkeypatch.setenv("DB_PATH", str(tmp_db))
 
     from app.db import sol_store
+
     sol_store.init()
 
     from app.services import market

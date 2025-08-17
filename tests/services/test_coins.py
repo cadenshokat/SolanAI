@@ -3,18 +3,20 @@ def test_refresh_new_coins_parses_and_flags(monkeypatch):
 
     class FakePF:
         def list_new(self):
-            return [{
-                "creationTime": 1710000000000,
-                "imageUrl": "i",
-                "name": "Foo",
-                "ticker": "FOO",
-                "marketCap": 100000,
-                "numHolders": 3,
-                "volume": 1000,
-                "dev": "dev1",
-                "coinMint": "mint1",
-                "holders": [{"holderId": "dev1", "ownedPercentage": 10}],
-            }]
+            return [
+                {
+                    "creationTime": 1710000000000,
+                    "imageUrl": "i",
+                    "name": "Foo",
+                    "ticker": "FOO",
+                    "marketCap": 100000,
+                    "numHolders": 3,
+                    "volume": 1000,
+                    "dev": "dev1",
+                    "coinMint": "mint1",
+                    "holders": [{"holderId": "dev1", "ownedPercentage": 10}],
+                }
+            ]
 
     monkeypatch.setattr(coins, "PumpFunClient", lambda: FakePF())
 
@@ -33,17 +35,19 @@ def test_refresh_almost(monkeypatch):
 
     class FakePF:
         def about_to_graduate(self):
-            return [{
-                "creationTime": 1710001000000,
-                "coinMint": "X",
-                "name": "Bar",
-                "ticker": "BAR",
-                "volume": 5000,
-                "marketCap": 500000,
-                "imageUrl": "img",
-                "numHolders": 12,
-                "bondingCurveProgress": 0.8,
-            }]
+            return [
+                {
+                    "creationTime": 1710001000000,
+                    "coinMint": "X",
+                    "name": "Bar",
+                    "ticker": "BAR",
+                    "volume": 5000,
+                    "marketCap": 500000,
+                    "imageUrl": "img",
+                    "numHolders": 12,
+                    "bondingCurveProgress": 0.8,
+                }
+            ]
 
     monkeypatch.setattr(coins, "PumpFunClient", lambda: FakePF())
 
@@ -62,13 +66,19 @@ def test_refresh_coin_metadata_calls_cache_set(monkeypatch):
     monkeypatch.setattr(coins.wallets, "get_candidate_tokens", lambda: {"T1", "T2"})
 
     sets = []
+
     class FakeCache:
         @staticmethod
-        def get(k): return None
+        def get(k):
+            return None
+
         @staticmethod
-        def set(k, v): sets.append((k, v))
+        def set(k, v):
+            sets.append((k, v))
+
         @staticmethod
-        def get_all(): return {"T1": {"name": "X"}}
+        def get_all():
+            return {"T1": {"name": "X"}}
 
     monkeypatch.setattr(coins, "cache", FakeCache)
 

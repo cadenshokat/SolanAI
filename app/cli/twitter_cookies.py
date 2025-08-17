@@ -2,12 +2,11 @@ from __future__ import annotations
 
 import json
 import os
-from pathlib import Path
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 
 from ..clients.twscrape_pool import _cookies_path  # reuse path helper
 

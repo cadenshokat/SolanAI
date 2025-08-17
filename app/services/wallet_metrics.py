@@ -4,11 +4,11 @@ import os
 from typing import Dict, Optional
 
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 def get_wallet_7d_metrics(wallet_address: str, timeout_s: int = 20) -> Optional[Dict[str, str]]:
@@ -54,7 +54,9 @@ def get_wallet_7d_metrics(wallet_address: str, timeout_s: int = 20) -> Optional[
         pnl = pnl_el.text
 
         # 7d Volume — keep selector broad to tolerate UI changes
-        vol_el = wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, "span.text-title-medium-20")))
+        vol_el = wait.until(
+            ec.presence_of_element_located((By.CSS_SELECTOR, "span.text-title-medium-20"))
+        )
         vol = vol_el.text
 
         return {"7d PnL": pnl, "7d Volume": vol}

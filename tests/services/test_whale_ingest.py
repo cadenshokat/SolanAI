@@ -7,18 +7,20 @@ def test_extract_whale_buys_basic():
             "meta": {
                 "err": None,
                 "preTokenBalances": [
-                    {"owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
-                     "mint": "So11111111111111111111111111111111111111112",
-                     "uiTokenAmount": {"uiAmount": sol_before}},
-                    {"owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
-                     "mint": mint}
+                    {
+                        "owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
+                        "mint": "So11111111111111111111111111111111111111112",
+                        "uiTokenAmount": {"uiAmount": sol_before},
+                    },
+                    {"owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1", "mint": mint},
                 ],
                 "postTokenBalances": [
-                    {"owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
-                     "mint": "So11111111111111111111111111111111111111112",
-                     "uiTokenAmount": {"uiAmount": sol_after}},
-                    {"owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
-                     "mint": mint}
+                    {
+                        "owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
+                        "mint": "So11111111111111111111111111111111111111112",
+                        "uiTokenAmount": {"uiAmount": sol_after},
+                    },
+                    {"owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1", "mint": mint},
                 ],
             },
         }
@@ -40,13 +42,20 @@ def test_run_once_processes_new_slots(monkeypatch):
 
     class FakeStore:
         @staticmethod
-        def init(): pass
+        def init():
+            pass
+
         @staticmethod
-        def get_last_slot(): return 10
+        def get_last_slot():
+            return 10
+
         @staticmethod
-        def set_last_slot(s): calls["set"].append(s)
+        def set_last_slot(s):
+            calls["set"].append(s)
+
         @staticmethod
-        def save_transfers(ts, transfers): calls["save"].append((ts, transfers))
+        def save_transfers(ts, transfers):
+            calls["save"].append((ts, transfers))
 
     monkeypatch.setattr(wi, "whale_store", FakeStore)
 
@@ -54,24 +63,32 @@ def test_run_once_processes_new_slots(monkeypatch):
 
     def txs(slot):
         if slot == 11:
-            return [{
-                "transaction": {"signatures": ["t11"], "message": {"accountKeys": ["S1"]}},
-                "meta": {
-                    "err": None,
-                    "preTokenBalances": [
-                        {"owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
-                         "mint": "So11111111111111111111111111111111111111112",
-                         "uiTokenAmount": {"uiAmount": 50}},
-                    ],
-                    "postTokenBalances": [
-                        {"owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
-                         "mint": "So11111111111111111111111111111111111111112",
-                         "uiTokenAmount": {"uiAmount": 40}},
-                        {"owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
-                         "mint": "MintA"},
-                    ],
-                },
-            }]
+            return [
+                {
+                    "transaction": {"signatures": ["t11"], "message": {"accountKeys": ["S1"]}},
+                    "meta": {
+                        "err": None,
+                        "preTokenBalances": [
+                            {
+                                "owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
+                                "mint": "So11111111111111111111111111111111111111112",
+                                "uiTokenAmount": {"uiAmount": 50},
+                            },
+                        ],
+                        "postTokenBalances": [
+                            {
+                                "owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
+                                "mint": "So11111111111111111111111111111111111111112",
+                                "uiTokenAmount": {"uiAmount": 40},
+                            },
+                            {
+                                "owner": "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1",
+                                "mint": "MintA",
+                            },
+                        ],
+                    },
+                }
+            ]
         return []
 
     monkeypatch.setattr(wi, "_get_block_transactions", txs)
