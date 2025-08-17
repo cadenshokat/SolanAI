@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import os
 from typing import Any, Dict, List
-import requests
 
+import requests
 
 _CMC_BASE = "https://pro-api.coinmarketcap.com/v3"
 _TIMEOUT = 15

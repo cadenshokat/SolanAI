@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import os
 from typing import Any, Dict, List
-import requests
 
+import requests
 
 DEFAULT_UA = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -18,7 +18,9 @@ class PumpFunClient:
       PUMPFUN_UA, PUMPFUN_REFERER
     """
 
-    def __init__(self, base: str = "https://advanced-api-v2.pump.fun", timeout_s: float = 15.0) -> None:
+    def __init__(
+        self, base: str = "https://advanced-api-v2.pump.fun", timeout_s: float = 15.0
+    ) -> None:
         self.base = base.rstrip("/")
         self.timeout_s = timeout_s
         self.session = requests.Session()

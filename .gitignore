@@ -1,0 +1,108 @@
+# -----------------------------
+# Python / Packaging
+# -----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+pip-log.txt
+
+# -----------------------------
+# Virtualenvs
+# -----------------------------
+.venv/
+venv/
+env/
+ENV/
+.conda/
+
+# -----------------------------
+# Tests / Coverage / Linters
+# -----------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.cache/
+.mypy_cache/
+.ruff_cache/
+
+# -----------------------------
+# Logs / Temp
+# -----------------------------
+*.log
+logs/
+tmp/
+temp/
+*.pid
+
+# -----------------------------
+# Environment / Secrets
+# -----------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.der
+*.p12
+*.pfx
+
+# -----------------------------
+# SQLite / Local Data
+# -----------------------------
+*.db
+*.sqlite
+*.sqlite3
+data/
+!data/.keep
+
+# -----------------------------
+# Twitter cookies (never commit)
+# -----------------------------
+tweet_scraper/cookies/
+tweet_scraper/cookies/**
+
+# -----------------------------
+# Editors / IDEs / OS
+# -----------------------------
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+*.swn
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+.Spotlight-V100
+.Trashes
+*.orig
+
+# -----------------------------
+# Node / Next.js (if present)
+# -----------------------------
+node_modules/
+.next/
+out/
+.turbo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.env.local
+.env*.local
+
+# -----------------------------
+# Docker (optional)
+# -----------------------------
+docker-compose.override.yml
+volumes/

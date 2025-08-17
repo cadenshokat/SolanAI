@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
+
 from .session import get_conn
 
 
@@ -33,12 +34,18 @@ def trendline() -> List[Dict[str, Any]]:
             "SELECT timestamp, price, dayChange FROM sol_cache ORDER BY timestamp ASC"
         ).fetchall()
         return [
-            {"timestamp": int(r["timestamp"]), "price": float(r["price"]), "dayChange": float(r["dayChange"])}
+            {
+                "timestamp": int(r["timestamp"]),
+                "price": float(r["price"]),
+                "dayChange": float(r["dayChange"]),
+            }
             for r in rows
         ]
 
 
 def daychange_at(timestamp: int) -> Optional[float]:
     with get_conn() as c:
-        row = c.execute("SELECT dayChange FROM sol_cache WHERE timestamp = ?", (int(timestamp),)).fetchone()
+        row = c.execute(
+            "SELECT dayChange FROM sol_cache WHERE timestamp = ?", (int(timestamp),)
+        ).fetchone()
         return float(row["dayChange"]) if row else None

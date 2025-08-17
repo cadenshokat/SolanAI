@@ -1,12 +1,15 @@
-import asyncio
 import datetime as dt
 
 
 def test_run_search_job_aggregates_and_persists(monkeypatch, tmp_path):
     from app.services import twitter_accounts as svc
 
-    async def fake_add(_): return None
-    async def fake_del(_): return None
+    async def fake_add(_):
+        return None
+
+    async def fake_del(_):
+        return None
+
     monkeypatch.setattr(svc, "add_account", fake_add)
     monkeypatch.setattr(svc, "delete_account", fake_del)
 
@@ -22,9 +25,9 @@ def test_run_search_job_aggregates_and_persists(monkeypatch, tmp_path):
 
     async def gen():
         yield Tweet(now - dt.timedelta(minutes=10), 5, 1, 2, "great project")  # positive
-        yield Tweet(now - dt.timedelta(minutes=30), 1, 0, 0, "meh")            # neutral-ish
-        yield Tweet(now - dt.timedelta(minutes=50), 2, 1, 0, "bad idea")       # negative
-        yield Tweet(now - dt.timedelta(hours=3), 50, 10, 10, "old")            # too old
+        yield Tweet(now - dt.timedelta(minutes=30), 1, 0, 0, "meh")  # neutral-ish
+        yield Tweet(now - dt.timedelta(minutes=50), 2, 1, 0, "bad idea")  # negative
+        yield Tweet(now - dt.timedelta(hours=3), 50, 10, 10, "old")  # too old
 
     class FakeAPI:
         async def search(self, q, limit=500):
@@ -37,10 +40,13 @@ def test_run_search_job_aggregates_and_persists(monkeypatch, tmp_path):
 
     class FakeStore:
         @staticmethod
-        def init(): pass
+        def init():
+            pass
+
         @staticmethod
         def insert_metric(coin, posts, engagements, ts):
             snapshots.append((coin, posts, engagements, ts))
+
         @staticmethod
         def latest_two_within(coin, since_minutes):
             return [(10, 100), (5, 50)]  # now, prev
@@ -59,8 +65,12 @@ def test_run_search_job_aggregates_and_persists(monkeypatch, tmp_path):
 def test_run_search_job_not_enough_data(monkeypatch):
     from app.services import twitter_accounts as svc
 
-    async def fake_add(_): return None
-    async def fake_del(_): return None
+    async def fake_add(_):
+        return None
+
+    async def fake_del(_):
+        return None
+
     monkeypatch.setattr(svc, "add_account", fake_add)
     monkeypatch.setattr(svc, "delete_account", fake_del)
 
@@ -75,9 +85,13 @@ def test_run_search_job_not_enough_data(monkeypatch):
 
     class FakeStore:
         @staticmethod
-        def init(): pass
+        def init():
+            pass
+
         @staticmethod
-        def insert_metric(coin, posts, engagements, ts): pass
+        def insert_metric(coin, posts, engagements, ts):
+            pass
+
         @staticmethod
         def latest_two_within(coin, since_minutes):
             return [(1, 10)]

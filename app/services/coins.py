@@ -1,13 +1,12 @@
 from __future__ import annotations
-from threading import RLock
-from typing import Dict, Any, List, Set
-from datetime import datetime, timezone
 
+from threading import RLock
+from typing import Any, Dict, List, Set
+
+from ..clients.pumpfun import PumpFunClient
 from ..db import coin_cache as cache
-from ..core.config import settings
 from ..services import wallets
 from ..services.coin_meta import get_coin_data
-from ..clients.pumpfun import PumpFunClient
 
 cache.init()
 

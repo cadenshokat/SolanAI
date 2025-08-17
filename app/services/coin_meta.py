@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from typing import Any, Dict, List
+
 import requests
 
 
@@ -9,7 +10,12 @@ def _format_large_number(n: int) -> str:
     num = int(n)
     if num < 1_000:
         return f"{num:,}"
-    for div, suffix in [(1_000, "k"), (1_000_000, "m"), (1_000_000_000, "b"), (1_000_000_000_000, "t")]:
+    for div, suffix in [
+        (1_000, "k"),
+        (1_000_000, "m"),
+        (1_000_000_000, "b"),
+        (1_000_000_000_000, "t"),
+    ]:
         if num < div * 1000:
             val = num / div
             s = f"{val:.2f}".rstrip("0").rstrip(".")

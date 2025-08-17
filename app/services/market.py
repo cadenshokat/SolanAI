@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from typing import Any, Dict, List, Optional
+
 import requests
 
 from ..db import sol_store
@@ -32,7 +33,9 @@ def fetch_sol_price() -> Dict[str, Any]:
     Returns: {"price": float, "timestamp": int, "dayChange": float}
     """
     address = os.getenv("SOL_MINT", "So11111111111111111111111111111111111111112")
-    r = requests.get(_BIRDEYE_URL, params={"address": address}, headers=_birdeye_headers(), timeout=_TIMEOUT)
+    r = requests.get(
+        _BIRDEYE_URL, params={"address": address}, headers=_birdeye_headers(), timeout=_TIMEOUT
+    )
     r.raise_for_status()
     data = (r.json() or {}).get("data") or {}
     return {

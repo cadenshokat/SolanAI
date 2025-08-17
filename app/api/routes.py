@@ -1,18 +1,18 @@
 from __future__ import annotations
 
-from flask import Blueprint, jsonify, request
 from typing import Any, Dict
 
-from ..services import coins, wallets, trends, fear, whales
+from flask import Blueprint, jsonify, request
 
 # NEW
-from ..services import market
+from ..services import coins, fear, market, trends, wallets, whales
 
 api = Blueprint("api", __name__)
 
 # ---------
 # Coins
 # ---------
+
 
 @api.get("/coins/new")
 def new_coins() -> Any:
@@ -35,6 +35,7 @@ def coin_cache_all() -> Any:
 # ---------
 # Wallets
 # ---------
+
 
 @api.get("/wallets/tracker")
 def wallet_tracker() -> Any:
@@ -72,10 +73,12 @@ def update_wallets() -> Any:
 # Solana price/trend
 # ---------
 
+
 @api.get("/sol/trendline")
 def sol_trendline():
     market.refresh_sol_price()
     return jsonify(market.get_sol_trendline())
+
 
 @api.get("/sol/daychange")
 def sol_daychange():
@@ -92,6 +95,7 @@ def sol_daychange():
 # Trends (Twitter)
 # -----------------------------------------------------------------------------
 
+
 @api.get("/trending")
 def trending() -> Any:
     """
@@ -106,6 +110,7 @@ def trending() -> Any:
 # ---------
 # Fear vs Greed
 # ---------
+
 
 @api.get("/fear-vs-greed")
 def fear_vs_greed_current() -> Any:
@@ -122,6 +127,7 @@ def fear_vs_greed_history() -> Any:
 # ---------
 # Whales / Liquidity
 # ---------
+
 
 @api.get("/whales/transfers")
 def whale_transfers() -> Any:
@@ -146,6 +152,7 @@ def liquidity() -> Any:
 # ---------
 # Health
 # ---------
+
 
 @api.get("/health")
 def health() -> Any:

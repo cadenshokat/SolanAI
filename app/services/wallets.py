@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
 from threading import RLock
-from typing import Dict, List, Tuple, Any, Set
+from typing import Any, Dict, List, Set
 
 from app.clients.solscan import SolscanClient
+
 from .wallet_metrics import get_wallet_7d_metrics
 
 EXCLUDED_TOKENS: Set[str] = {
@@ -30,6 +31,7 @@ _recent_transfers_lock = RLock()
 # API
 # -------------------------
 
+
 def update_wallets(wallets: List[str]) -> List[str]:
     wallets = [w for w in (wallets or []) if isinstance(w, str)][:10]
     with _wallet_lock:
@@ -38,17 +40,21 @@ def update_wallets(wallets: List[str]) -> List[str]:
     refresh_wallet_overview()
     return list(wallets)
 
+
 def get_wallets() -> List[str]:
     with _wallet_lock:
         return list(_wallets)
+
 
 def get_tracker_cache() -> Dict[str, Any]:
     with _tracker_lock:
         return {k: v for k, v in _tracker_cache.items()}
 
+
 def get_overview_cache() -> Dict[str, dict]:
     with _overview_lock:
         return dict(_overview_cache)
+
 
 def get_candidate_tokens() -> Set[str]:
     """Tokens seen in most-recent 'new_transfers' cache for metadata enrichment."""
@@ -62,9 +68,11 @@ def get_candidate_tokens() -> Set[str]:
                 tokens.add(token)
     return tokens
 
+
 # -------------------------
 # SCHEDULED JOBS
 # -------------------------
+
 
 def refresh_wallet_tracker(min_wallets: int = 3) -> None:
     w = get_wallets()
@@ -80,13 +88,16 @@ def refresh_wallet_tracker(min_wallets: int = 3) -> None:
         _recent_transfers_cache.update(transfers_by_wallet)
 
     hot_buys = _get_popular_tokens(transfers_by_wallet, min_wallets=min_wallets)
-    new_hot_buys = _get_new_popular_tokens(transfers_by_wallet, min_wallets=min_wallets, within_minutes=5)
+    new_hot_buys = _get_new_popular_tokens(
+        transfers_by_wallet, min_wallets=min_wallets, within_minutes=5
+    )
     new_transfers = _get_new_transfers(transfers_by_wallet, within_minutes=5)
 
     with _tracker_lock:
         _tracker_cache["hot_buys"] = hot_buys
         _tracker_cache["new_hot_buys"] = new_hot_buys
         _tracker_cache["new_transfers"] = new_transfers
+
 
 def refresh_wallet_overview() -> None:
     w = get_wallets()
@@ -100,16 +111,20 @@ def refresh_wallet_overview() -> None:
                 metrics = {"7d PnL": "Error", "7d Volume": "Error"}
             _overview_cache[wallet] = metrics
 
+
 # -------------------------
 # Core logic (refactor of wallet_tracker.py)
 # -------------------------
+
 
 def _get_recent_transfers(wallets: List[str]) -> Dict[str, List[Dict[str, Any]]]:
     client = SolscanClient()
     out: Dict[str, List[Dict[str, Any]]] = {}
     for wallet in wallets:
         try:
-            rows = client.account_transfers(wallet, page=1, page_size=30, remove_spam=True, exclude_amount_zero=True)
+            rows = client.account_transfers(
+                wallet, page=1, page_size=30, remove_spam=True, exclude_amount_zero=True
+            )
         except Exception:
             rows = []
 
@@ -148,6 +163,7 @@ def _get_recent_transfers(wallets: List[str]) -> Dict[str, List[Dict[str, Any]]]
         out[wallet] = normalized
     return out
 
+
 def _parse_age_str(age_str: str) -> timedelta:
     parts = (age_str or "").split(", ")
     if len(parts) == 2:
@@ -158,6 +174,7 @@ def _parse_age_str(age_str: str) -> timedelta:
         time_part = parts[0] if parts else "0:00:00"
     hrs, mins, secs = time_part.split(":")
     return timedelta(days=days, hours=float(hrs), minutes=float(mins), seconds=float(secs))
+
 
 def _get_new_transfers(
     wallet_transfers: Dict[str, List[Dict[str, Any]]],
@@ -178,6 +195,7 @@ def _get_new_transfers(
             result[wallet] = recent
     return result
 
+
 def _get_popular_tokens(
     wallet_transfers: Dict[str, List[Dict[str, Any]]],
     min_wallets: int = 2,
@@ -189,6 +207,7 @@ def _get_popular_tokens(
             if token:
                 token_wallets[token].add(wallet)
     return {tok: len(ws) for tok, ws in token_wallets.items() if len(ws) >= min_wallets}
+
 
 def _get_new_popular_tokens(
     wallet_transfers: Dict[str, List[Dict[str, Any]]],

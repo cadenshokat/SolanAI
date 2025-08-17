@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-import sqlite3
-from typing import Optional, Tuple, List
 from datetime import datetime, timedelta, timezone
+from typing import List, Optional, Tuple
 
 from .session import get_conn
 
@@ -20,9 +19,7 @@ def init() -> None:
             )
             """
         )
-        c.execute(
-            "CREATE INDEX IF NOT EXISTS idx_tweet_metrics_coin_ts ON tweet_metrics(coin, ts)"
-        )
+        c.execute("CREATE INDEX IF NOT EXISTS idx_tweet_metrics_coin_ts ON tweet_metrics(coin, ts)")
         c.commit()
 
 

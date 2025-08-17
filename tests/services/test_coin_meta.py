@@ -1,7 +1,3 @@
-import json
-import os
-
-
 def test_get_coin_data_formats_and_uses_key(mock_http, monkeypatch):
     # Ensure env key is set so header gets added
     monkeypatch.setenv("COINGECKO_API_KEY", "demo-key")

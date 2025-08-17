@@ -2,14 +2,13 @@ from __future__ import annotations
 
 import asyncio
 from datetime import datetime, timedelta, timezone
-from typing import Dict, Any
+from typing import Any, Dict
 
 from textblob import TextBlob
 from twscrape import API
 
 from ..db import tweet_store
 from .twitter_accounts import add_account, delete_account
-
 
 tweet_store.init()
 
@@ -99,4 +98,6 @@ def run_search_job(
     """
     Sync wrapper so you can schedule this with our BackgroundScheduler.
     """
-    return asyncio.run(_fetch_and_aggregate(account_username, search_query, lookback_minutes, limit))
+    return asyncio.run(
+        _fetch_and_aggregate(account_username, search_query, lookback_minutes, limit)
+    )

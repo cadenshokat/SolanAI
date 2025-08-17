@@ -26,6 +26,7 @@ def _test_env():
 @pytest.fixture
 def app():
     from app import create_app
+
     flask_app = create_app()
     flask_app.config.update(TESTING=True)
     return flask_app
