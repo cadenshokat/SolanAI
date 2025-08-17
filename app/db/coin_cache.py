@@ -12,10 +12,12 @@ CREATE TABLE IF NOT EXISTS coin_cache (
 );
 """
 
+
 def init() -> None:
     with get_conn() as conn:
         conn.execute(_TABLE_SQL)
         conn.commit()
+
 
 def get(token: str) -> Optional[Dict[str, Any]]:
     with get_conn() as conn:
@@ -30,6 +32,7 @@ def get(token: str) -> Optional[Dict[str, Any]]:
     except Exception:
         return None
 
+
 def set(token: str, info: Dict[str, Any]) -> None:
     payload = json.dumps(info)
     with get_conn() as conn:
@@ -38,6 +41,7 @@ def set(token: str, info: Dict[str, Any]) -> None:
             (token, payload),
         )
         conn.commit()
+
 
 def get_all() -> Dict[str, Any]:
     out: Dict[str, Any] = {}
