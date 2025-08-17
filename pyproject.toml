@@ -9,7 +9,7 @@ description = "Solana tracking API with Flask, APScheduler, SQLite, and Twitter/
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
-authors = [{ name = "Your Name" }]
+authors = [{ name = "Caden Shokat" }]
 keywords = ["flask", "solana", "scheduler", "sqlite", "api", "twitter", "defi"]
 
 dependencies = [

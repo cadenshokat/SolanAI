@@ -1,0 +1,19 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11', cache: 'pip' }
+      - run: pip install -e .[dev]
+      - run: ruff check .
+      - run: black --check .
+      - run: isort --check-only .
+      - run: pytest
+        env:
+          DB_PATH: /tmp/solwatch_ci.db
+          BIRDEYE_API_KEY: dummy
+          CMC_API_KEY: dummy
+          API_PREFIX: /api/v1
