@@ -1,70 +1,99 @@
-# SolanAI
+# SolanAI (Flask + Schedulers + SQLite)
 
-SolanAI is a real-time analytics platform that collects on-chain data from the Solana blockchain—such as new coin listings, wallet tracking, liquidity events, and more—and merges it with off-chain social sentiment (e.g., trending Twitter topics). By providing holistic, data-driven insights, SolanAI aims to help users discover potentially profitable opportunities in the fast-moving world of Solana meme coins and beyond.
+A small, production-style API that tracks Solana activity (new coins, wallet flows, whale buys, liquidity adds), SOL price trendlines, Twitter trends/sentiment, and Fear & Greed — with clean layering, background jobs, and a Next.js-friendly REST surface.
 
----
-
-## Table of Contents
-
-1. [Features](#features)  
-2. [Project Structure](#project-structure)  
-3. [Installation & Setup](#installation--setup)  
-4. [Usage](#usage)  
-5. [Roadmap](#roadmap)  
-6. [Contributing](#contributing)  
-7. [License](#license)  
-8. [Contact](#contact)
+## Highlights
+- Flask app factory + Blueprints (`/api/v1/...`)
+- Background jobs via APScheduler (separate worker-friendly)
+- Centralized DB helpers (SQLite, WAL) and thin stores
+- Clean “clients / services / db” layering
+- Env-driven secrets (no hardcoded cookies/keys)
+- Next.js SDK ready (`src/lib/api.ts` example was provided)
 
 ---
 
-## Features
-
-- **New Coin & Bonding Curve Tracking**  
-  - Reverse-engineers APIs to identify newly listed coins and those about to graduate bonding curves.  
-  - Provides key financial metrics and status indicators for each coin.
-
-- **Whale Transactions**  
-  - Monitors high-value Solana transactions in real time.  
-  - Flags token buys above a specified threshold (e.g., \$1,000) to detect potential market movers.
-
-- **Wallet Tracker**  
-  - Gathers recent transactions from specified wallet addresses.  
-  - Aggregates and highlights when multiple wallets buy the same token simultaneously.
-
-- **Liquidity Add Listener**  
-  - Uses Flask, Serveo, and Helium webhooks to detect liquidity-adding transactions on AMMs like Raydium and Meteora.  
-  - Records relevant data (e.g., token, timestamp, volume) for analysis.
-
-- **Twitter Scraper & Sentiment Analysis**  
-  - Scrapes Twitter for coin mentions, engagement metrics, and sentiment scores.  
-  - Identifies spikes in social sentiment that may correlate with price action.
-
-- **React Front End**  
-  - Displays aggregated data in a clean, modern interface.  
-  - Offers quick insights via charts, tables, and live updates.
-
-- **(Planned) Machine Learning Integration**  
-  - Aims to correlate historical data (price, sentiment, liquidity, transactions) to predict optimal entry points for trades.
+## Stack
+**Backend:** Flask, APScheduler, requests  
+**Data:** SQLite (file path via env), WAL mode  
+**Scraping/APIs:** twscrape, Selenium (optional), CoinGecko, Birdeye, CoinMarketCap, Solscan, Pump.fun  
+**Prod serving:** Gunicorn (web) + a separate worker process
 
 ---
 
-## Project Structure
-
-
-- **frontend/**  
-  Contains the React application responsible for the user interface and data visualization.
-
-- **src/**  
-  Houses Python scripts and modules that gather, filter, and process on-chain and off-chain data.
-
-- **ml_liquidity_detector/**  
-  (Placeholder for future ML integration) Includes scripts, notebooks, or pipelines for machine learning experiments and model training.
+## Repo Layout
+```
+solwatch/
+app/
+init.py
+api/routes.py
+core/{config.py, logging.py}
+clients/{solscan.py, pumpfun.py, twscrape_pool.py}
+db/{session.py, coin_cache.py, sol_store.py, tweet_store.py, whale_store.py}
+services/{coins.py, coin_meta.py, wallet_metrics.py, wallets.py,
+whales.py, whales_ingest.py, trends.py, tweets.py, twitter_accounts.py,
+fear.py, market.py}
+cli/capture_twitter_cookies.py
+worker/jobs.py
+run.py
+requirements.txt
+.env.example
+Dockerfile
+docker-compose.yml
+Makefile
+.gitignore
+README.md
+```
 
 ---
 
-## Installation & Setup
+## Quickstart (Local)
 
-1. **Clone the Repository**  
-   ```bash
-   git clone https://github.com/cadenskelaot/SolanAI.git
-   cd SolanAI
+### 1. Python & deps
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 2. Configure env
+
+Copy and fill in ```.env```:
+
+```env
+# API
+API_PREFIX=/api/v1
+HOST=0.0.0.0
+PORT=5000
+CORS_ORIGINS=["http://localhost:3000"]
+
+# DBs
+DB_PATH=data/main.db
+LIQUIDITY_DB=liquidityAdds.db
+TRENDS_DB=trend_scraper/trending_data.db
+
+# Pump.fun
+PUMPFUN_UA=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+PUMPFUN_REFERER=https://pump.fun/
+
+# Solscan
+SOLSCAN_COOKIE=
+SOLSCAN_AUTH=
+
+# Coin metadata
+COINGECKO_API_KEY=
+
+# SOL price (Birdeye)
+BIRDEYE_API_KEY=
+SOL_MINT=So11111111111111111111111111111111111111112
+
+# Fear & Greed (CoinMarketCap)
+CMC_API_KEY=
+
+# Twitter / Trends
+TW_ACCOUNTS_PY=config.twitter_accounts
+# TW_ACCOUNTS_FILE=config/twitter_accounts.json
+TW_COOKIES_DIR=tweet_scraper/cookies
+CHROMEDRIVER_PATH=/usr/bin/chromedriver
+TRENDS_USER=twitterUser
+```

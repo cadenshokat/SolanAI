@@ -1,0 +1,10 @@
+Flask>=3.0,<4
+flask-cors>=4.0,<5
+APScheduler>=3.10,<4
+pydantic==1.10.13
+python-dotenv>=1.0,<2
+requests>=2.31,<3
+selenium>=4.20,<5
+twscrape>=0.12
+textblob>=0.17,<0.18
+gunicorn>=21.2,<22

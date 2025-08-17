@@ -1,0 +1,12 @@
+{
+  "user": {
+    "password": "••••",
+    "email": "user@example.com",
+    "email_password": "••••"
+  },
+  "another_user": {
+    "password": "••••",
+    "email": "another@example.com",
+    "email_password": "••••"
+  }
+}
