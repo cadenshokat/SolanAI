@@ -22,7 +22,7 @@ dependencies = [
   "selenium>=4.20,<5",
   "twscrape>=0.12",
   "textblob>=0.17,<0.18",
-  "gunicorn>=21.2,<22",
+  "gunicorn>=21.2,<24",
 ]
 
 [project.optional-dependencies]
