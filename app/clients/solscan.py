@@ -53,7 +53,7 @@ class SolscanClient:
         self,
         address: str,
         page: int = 1,
-        page_size: int = 30,
+        page_size: int = 50,
         remove_spam: bool = True,
         exclude_amount_zero: bool = True,
     ) -> List[Dict[str, Any]]:

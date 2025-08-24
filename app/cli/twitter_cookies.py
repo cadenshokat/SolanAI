@@ -14,7 +14,7 @@ from ..clients.twscrape_pool import _cookies_path  # reuse path helper
 def capture_cookies_via_browser(username: str) -> None:
     driver_path = os.getenv("CHROMEDRIVER_PATH")
     if not driver_path:
-        raise RuntimeError("CHROMEDRIVER_PATH env var is required for Selenium cookie capture.")
+        raise RuntimeError("CHROMEDRIVER_PATH env var is required for Selenium cookie capture. Set CHROMEDRIVER_PATH in .env.")
 
     options = Options()
     options.add_argument("--disable-gpu")
