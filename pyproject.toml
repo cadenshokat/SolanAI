@@ -14,7 +14,7 @@ keywords = ["flask", "solana", "scheduler", "sqlite", "api", "twitter", "defi"]
 
 dependencies = [
   "Flask>=3.0,<4",
-  "flask-cors>=4.0,<5",
+  "flask-cors>=4.0,<7",
   "APScheduler>=3.10,<4",
   "pydantic==1.10.13",
   "python-dotenv>=1.0,<2",
